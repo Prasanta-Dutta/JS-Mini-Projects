@@ -1,0 +1,25 @@
+*, html, body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.background{
+    background-color: #212121;
+    color: #fff;
+}
+.main-container{
+    height: 100vh !important;
+    width: 100vw !important;
+    margin: 0;
+    padding: 0;
+    border: 5px solid salmon;
+}
+.color-box{
+    height: 120px;
+    width: 120px !important;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px rgba(255, 255, 255, 0.5), -1px -1px 3px rgba(255, 255, 255, 0.5) ;
+}
+.color-box:hover{
+    box-shadow: 3px 3px 3px rgba(255, 255, 255, 0.5), -3px -3px 3px rgba(255, 255, 255, 0.5) ;
+}
