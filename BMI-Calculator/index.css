@@ -1,0 +1,27 @@
+*,body,html{
+    margin: 0;
+    padding: 0;
+    /* width: 100%; */
+    box-sizing: border-box;
+}
+
+.dark-mode{
+    background-color: #212121;
+    color: #fff;
+}
+
+.main-container{
+    width: 100vw;
+    height: 100vh;
+    border: 5px solid sandybrown;
+}
+
+.bmi-container{
+    max-width: 500px !important;
+}
+
+input{
+    padding: 2px;
+    padding-left: 10px;
+    font-weight: 600;
+}
