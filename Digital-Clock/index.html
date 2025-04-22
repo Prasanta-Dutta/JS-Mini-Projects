@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png"  href="./icons8-clock-64.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./index.css">
+    <title>Clock</title>
+</head>
+<body class="dark-mode">
+
+    <div class="main-container">
+        <div class="container clock-container my-2 py-2">
+            <div class="menu-bar d-flex flex-row justify-content-around mb-5">
+                <div class="menu active" id="time-bar">Time</div>
+                <div class="menu" id="stopwatch-bar">Stopwatch</div>
+                <div class="menu" id="timer-bar">Timer</div>
+            </div>
+            <div class="time-space d-flex justify-content-center align-items-center" id="time-box">
+                <div id="time">12:00 PM</div>
+            </div>
+            <div class="time-space d-flex flex-column justify-content-center align-items-center d-none" id="stopwatch-box">
+                <div id="stopwatch">00:00:00</div>
+                <div class="stopwatch-btn">
+                    <button type="button" id="stopwatchBtn" class="btn btn-light mt-5">Start</button>
+                    <button type="button" id="stopwatchBtn" class="btn btn-light mt-5">Reset</button>
+                </div>
+            </div>
+            <div class="timer time-space border border-success d-flex justify-content-center align-items-center d-none" id="timer-box">
+                Timer
+            </div>
+        </div>
+    </div>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+
+    <script src="./index.js"></script>
+</body>
+</html>

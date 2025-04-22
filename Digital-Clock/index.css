@@ -1,0 +1,44 @@
+*,body,html{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.dark-mode{
+    background-color: #212121;
+    color: #fff;
+}
+
+.main-container{
+    width: 100vw;
+    height: 100vh;
+    border: 5px solid wheat;
+}
+.menu-bar{
+    border-bottom: 4px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 15px;
+}
+.menu{
+    font-weight: 600;
+    padding: 2px;
+    cursor: pointer;
+    /* box-shadow: 1px 1px 5px, -1px -1px 5px; */
+}
+.active{
+    color: rgb(0, 255, 255);
+    border-bottom: 2px solid rgb(0, 255, 255);
+}
+
+.time-space{
+    height: 400px;
+    width: 100%;
+    font-size: 48px;
+    font-family: 'Orbitron', sans-serif, 'Audiowide', cursive, 'Share Tech Mono', monospace;
+    color: rgb(0, 255, 255);
+}
+
+/* #stopwatchBtn{
+    font-size: 16px;
+    padding: 5px;
+    border-radius: 5px;
+} */
