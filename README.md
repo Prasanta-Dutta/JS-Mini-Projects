@@ -161,3 +161,150 @@ form.addEventListener("submit", (e) => {
 
 });
 ```
+
+### 3. Project - Digital-Clock : Solution
+##### HTML
+```
+<body class="dark-mode">
+
+    <div class="main-container">
+        <div class="container clock-container my-2 py-2">
+            <div class="menu-bar d-flex flex-row justify-content-around mb-5">
+                <div class="menu active" id="time-bar">Time</div>
+                <div class="menu" id="stopwatch-bar">Stopwatch</div>
+                <div class="menu" id="timer-bar">Timer</div>
+            </div>
+            <div class="time-space d-flex justify-content-center align-items-center" id="time-box">
+                <div id="time">12:00:00 PM</div>
+            </div>
+            <div class="time-space d-flex flex-column justify-content-center align-items-center d-none" id="stopwatch-box">
+                <div id="stopwatch">00:00:00</div>
+                <div class="stopwatch-btn">
+                    <button type="button" id="stopwatchStartBtn" class="btn btn-primary mt-5">Start</button>
+                    <button type="button" id="stopwatchStopBtn" class="btn btn-danger mt-5 d-none">Stop</button>
+                    <button type="button" id="stopwatchResetBtn" class="btn btn-light mt-5">Reset</button>
+                </div>
+            </div>
+            <div class="timer time-space border border-success d-flex justify-content-center align-items-center d-none" id="timer-box">
+                Timer
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+```
+
+##### Javascript
+```
+const showTime = document.getElementById('time');
+console.log(showTime);
+
+const timeBar = document.getElementById('time-bar');
+const stopwatchBar = document.getElementById('stopwatch-bar');
+const timerBar = document.getElementById('timer-bar');
+
+const timeBox = document.getElementById('time-box');
+const stopwatchBox = document.getElementById('stopwatch-box');
+const timerBox = document.getElementById('timer-box');
+
+const stopwatchStartBtn = document.getElementById('stopwatchStartBtn');
+const stopwatchStopBtn = document.getElementById('stopwatchStopBtn');
+const stopwatchResetBtn = document.getElementById('stopwatchResetBtn');
+const stopwatch = document.getElementById('stopwatch');
+
+
+let timeIntervalID = setInterval(() => {
+    let currTime = new Date();
+    let hh = (currTime.getHours() % 12).toString().padStart(2, "0");
+    let mm = currTime.getMinutes().toString().padStart(2, "0");
+    let ss = currTime.getSeconds().toString().padStart(2, "0");
+
+    let ampm = currTime.toLocaleTimeString('en-IN').split(' ')[1];
+
+    showTime.innerHTML = `${hh}:${mm}:${ss} ${ampm}`;
+    console.log(`Time: ${currTime.toLocaleTimeString()}`);
+}, 1000);
+
+timeBar.addEventListener("click", (e) => {
+    stopwatchBar.classList.remove('active');
+    stopwatchBox.classList.add('d-none');
+
+    timerBar.classList.remove('active');
+    timerBox.classList.add('d-none');
+
+    timeBox.classList.remove('d-none');
+    timeBar.classList.add('active');
+
+    let hh, mm, ss, ampm;   //  Better if define inside setInterval(), bcs garbage collected after every second.
+
+    timeIntervalID = setInterval(() => {
+        let currTime = new Date();
+        hh = (currTime.getHours() % 12).toString().padStart(2, "0");
+        mm = currTime.getMinutes().toString().padStart(2, "0");
+        ss = currTime.getSeconds().toString().padStart(2, "0");
+
+        ampm = currTime.toLocaleTimeString('en-IN').split(' ')[1];
+
+        showTime.innerHTML = `${hh}:${mm}:${ss} ${ampm}`;
+        console.log(`Time: ${currTime.toLocaleTimeString()}`);
+    }, 1000);
+});
+
+
+let stopwatchIntervalID = null;
+
+stopwatchBar.addEventListener("click", (e) => {
+    clearInterval(timeIntervalID);
+    timeIntervalID = null;
+    
+    timeBar.classList.remove('active');
+    timeBox.classList.add('d-none');
+
+    timerBar.classList.remove('active');
+    timerBox.classList.add('d-none');
+
+    stopwatchBox.classList.remove('d-none');
+    stopwatchBar.classList.add('active');
+});
+
+stopwatchStartBtn.addEventListener("click", (e) => {
+    let startTimeStamp = Date.now();
+    let time = stopwatch.textContent.split(':');
+
+    stopwatchStartBtn.classList.add('d-none');
+    stopwatchStopBtn.classList.remove('d-none');
+
+    stopwatchIntervalID = setInterval(() => {
+        let tillNowTimeStamp = Date.now(); 
+        let displayTime = Math.floor((tillNowTimeStamp - startTimeStamp) / 1000);
+        console.log(`Stopwatch: ${displayTime}`);
+
+        let hh = parseInt(time[0]);
+        let mm = parseInt(time[1]);
+        let ss = parseInt(time[2]);   //  After every second garbage collected
+
+        displayTime = displayTime + (hh*3600) + (mm*60) + ss;
+        hh = Math.floor(displayTime/3600).toString();
+        mm = Math.floor((displayTime%3600) / 60).toString();
+        ss = Math.floor(displayTime%60).toString();
+        stopwatch.innerHTML = `${hh.padStart(2,"0")}:${mm.padStart(2,"0")}:${ss.padStart(2,"0")}`;
+    }, 1000);
+})
+
+stopwatchStopBtn.addEventListener("click", (e) => {
+    clearInterval(stopwatchIntervalID);
+    stopwatchIntervalID = null;
+
+    stopwatchStartBtn.classList.remove('d-none');
+    stopwatchStopBtn.classList.add('d-none');    
+});
+
+stopwatchResetBtn.addEventListener("click", (e) => {
+    clearInterval(stopwatchIntervalID);
+    stopwatchIntervalID = null;
+    stopwatch.innerHTML = "00:00:00";
+
+    stopwatchStartBtn.classList.remove('d-none');
+    stopwatchStopBtn.classList.add('d-none');
+});
+```
