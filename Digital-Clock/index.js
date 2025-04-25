@@ -17,14 +17,17 @@ const stopwatch = document.getElementById('stopwatch');
 
 let intervalID = setInterval(() => {
     let currTime = new Date();
-    let hh = currTime.getHours().toString().padStart(2, "0");
+    let hh = (currTime.getHours() % 12).toString().padStart(2, "0");
     let mm = currTime.getMinutes().toString().padStart(2, "0");
     let ss = currTime.getSeconds().toString().padStart(2, "0");
 
     let ampm = currTime.toLocaleTimeString('en-IN').split(' ')[1];
 
     showTime.innerHTML = `${hh}:${mm}:${ss} ${ampm}`;
+    console.log(`Time: ${currTime.toLocaleTimeString()}`);
 }, 1000);
+
+let stopwatchIntervalID = null;
 
 
 stopwatchBar.addEventListener("click", (e) => {
@@ -58,13 +61,14 @@ timeBar.addEventListener("click", (e) => {
     intervalID = setInterval(() => {
         let currTime = new Date();
         // showTime.innerHTML = currTime.toLocaleTimeString();
-        hh = currTime.getHours().toString().padStart(2, "0");
+        hh = (currTime.getHours() % 12).toString().padStart(2, "0");
         mm = currTime.getMinutes().toString().padStart(2, "0");
         ss = currTime.getSeconds().toString().padStart(2, "0");
 
         ampm = currTime.toLocaleTimeString('en-IN').split(' ')[1];
 
         showTime.innerHTML = `${hh}:${mm}:${ss} ${ampm}`;
+        console.log(`Time: ${currTime.toLocaleTimeString()}`);
     }, 1000);
 });
 
@@ -79,11 +83,10 @@ stopwatchStartBtn.addEventListener("click", (e) => {
     stopwatchStopBtn.classList.remove('d-none');
 
 
-    intervalID = setInterval(() => {
-        tillNowTimeStamp = Date.now();
-        displayTime = new Date(tillNowTimeStamp-startTimeStamp).getSeconds();  //   Time in seconds 
-        // displayTime = Math.floor((tillNowTimeStamp - startTimeStamp) / 1000);
-        console.log(displayTime);
+    stopwatchIntervalID = setInterval(() => {
+        tillNowTimeStamp = Date.now(); 
+        displayTime = Math.floor((tillNowTimeStamp - startTimeStamp) / 1000);
+        console.log(`Stopwatch: ${displayTime}`);
 
         let hh = parseInt(time[0]);
         let mm = parseInt(time[1]);
@@ -99,14 +102,17 @@ stopwatchStartBtn.addEventListener("click", (e) => {
 
 
 stopwatchResetBtn.addEventListener("click", (e) => {
-    clearInterval(intervalID);
-    intervalID = null;
+    clearInterval(stopwatchIntervalID);
+    stopwatchIntervalID = null;
     stopwatch.innerHTML = "00:00:00";
+
+    stopwatchStartBtn.classList.remove('d-none');
+    stopwatchStopBtn.classList.add('d-none');
 });
 
 stopwatchStopBtn.addEventListener("click", (e) => {
-    clearInterval(intervalID);
-    intervalID = null;
+    clearInterval(stopwatchIntervalID);
+    stopwatchIntervalID = null;
 
     stopwatchStartBtn.classList.remove('d-none');
     stopwatchStopBtn.classList.add('d-none');    
