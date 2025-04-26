@@ -1,0 +1,27 @@
+*, html, body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.dark-mode{
+    background-color: #414141;
+    color: #fff;
+}
+
+.main-container{
+    height: 100vh;
+    width: 100vw;
+    border: 5px solid rgb(245, 245, 245);
+}
+
+.progress-bar-container{
+    height: 500px;
+    width: 50%;
+    margin: 0;
+}
+
+.progress-bar{
+    margin: 0;
+    background-color: rgb(14, 196, 14);
+}
